@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
 
+    [SerializeField]
+    private float speed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +19,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * 2, Input.GetAxisRaw("Vertical") * 2);
+        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical") * speed);
     }
 }
