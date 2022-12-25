@@ -8,12 +8,24 @@ public class Bullet : MonoBehaviour
 
     public void shoot(Vector2 dir) {
         direction = dir;
-        Destroy(gameObject, 8f);
+        Destroy(gameObject, 15f);
     }
 
-    // Update is called once per frame
+    // private bool isOut(Vector3 pos) {
+    //     Vector3 currentPosition = Camera.main.WorldToScreenPoint(pos);        
+    //     return (currentPosition.x < 0f || currentPosition.x > 1f || currentPosition.y < 0f || currentPosition.y > 1f);
+    // }
+
+
+    // private bool isValid = false;
     void Update()
     {
-        transform.Translate(direction);
+        transform.Translate(direction * 1.5f);
+
+        // isValid = isValid || !isOut(transform.position);
+
+        // Debug.Log(isOut(transform.position));
+
+        // if (isValid && isOut(transform.position)) Destroy(gameObject, 0);
     }
 }
