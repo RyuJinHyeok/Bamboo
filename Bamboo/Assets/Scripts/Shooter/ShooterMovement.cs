@@ -15,24 +15,43 @@ public class ShooterMovement : MonoBehaviour
         screenHeight = rightTop.y;
     }
 
-    private float time = 0f;
+    //private float time = 0f;
 
-    void Update()
-    {
-        time += Time.deltaTime;
+    IEnumerator GeneratePosition() {
+
+        yield return new WaitForSeconds(1f);
 
         float x, y;
 
-        if (time >= 1f) {
-            time = 0f;
+        // 0: top, 1: bottom, 2: right, 3: left
+        int direction = Random.Range(0, 4);
 
-            x = Random.Range(-1f, 1f);
-            y = Random.Range(-1f, 1f);
-
-            x += (x < 0 ? -1 : 1) * screenWidth;
-            y += (y < 0 ? -1 : 1) * screenHeight;
-
-            transform.position = new Vector2(x, y);
+        if (direction < 2) {
+            x = Random.Range(-screenWidth, screenWidth);
+            y = direction == 0 ? screenHeight : -screenHeight;
+        } 
+        else {
+            y = Random.Range(-screenHeight, screenHeight);
+            x = direction == 2 ? -screenWidth : screenWidth;
         }
+
+        transform.position = new Vector2(x, y);
+    }
+
+
+    void Update()
+    {
+        // time += Time.deltaTime;
+
+
+
+        // if (time >= 1f) {
+        //     time = 0f;
+
+            
+        // }
+
+        StartCoroutine(GeneratePosition());
+
     }
 }
