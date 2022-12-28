@@ -10,17 +10,18 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
-    float time = 0f;
-    // Update is called once per frame
-    void Update()
-    {
-        time += Time.deltaTime;
+    void Start() {
+        StartCoroutine(ShootBullet());
+    }
 
-        if (time > 1f) {
-            time = 0f;
+    IEnumerator ShootBullet() {
+        while (true) {
+
+            yield return new WaitForSeconds(1.0f);
 
             Vector2 direction = player.transform.position - transform.position;
-            Bullet bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
+            Bullet bullet = ObjectPool.GetObject();
+            bullet.transform.position = transform.position;
             bullet.shoot(direction.normalized * 0.01f);
         }
     }

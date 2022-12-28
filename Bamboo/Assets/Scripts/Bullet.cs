@@ -6,9 +6,16 @@ public class Bullet : MonoBehaviour
 {
     private Vector2 direction;
 
+    [SerializeField]
+    private float speed = 1.0f;
+
     public void shoot(Vector2 dir) {
         direction = dir;
-        Destroy(gameObject, 15f);
+        Invoke("DestroyBullet", 15f);
+    }
+
+    private void DestroyBullet() {
+        ObjectPool.ReturnObject(this);
     }
 
     // private bool isOut(Vector3 pos) {
@@ -20,7 +27,7 @@ public class Bullet : MonoBehaviour
     // private bool isValid = false;
     void Update()
     {
-        transform.Translate(direction * 1.5f);
+        transform.Translate(direction * speed);
 
         // isValid = isValid || !isOut(transform.position);
 

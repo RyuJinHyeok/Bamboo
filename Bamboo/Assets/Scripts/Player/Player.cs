@@ -6,6 +6,9 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
 
+    [SerializeField]
+    private float speed = 2.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +21,7 @@ public class Player : MonoBehaviour
     {
         // 키 입력 시 속도를 주어 오브젝트가 이동하도록 함
 
-        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * 2, Input.GetAxisRaw("Vertical") * 2);
+        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * 2, Input.GetAxisRaw("Vertical") * speed);
 
 
 
