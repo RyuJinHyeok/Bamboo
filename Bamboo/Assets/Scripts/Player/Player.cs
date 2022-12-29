@@ -9,14 +9,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float speed = 2.0f;
 
-    // Start is called before the first frame update
-    void Start()
+    public static bool isDead = false;
+
+    void Awake()
     {
         transform.position = new Vector2(0, 0);
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         // 키 입력 시 속도를 주어 오브젝트가 이동하도록 함
@@ -35,5 +35,9 @@ public class Player : MonoBehaviour
         if (pos.y > 1f) pos.y = 1f;
 
         transform.position = Camera.main.ViewportToWorldPoint(pos);
+    }
+    
+    private void OnTriggerEnter2D(Collider2D col) {
+        isDead = true;
     }
 }

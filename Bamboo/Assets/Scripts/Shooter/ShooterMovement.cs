@@ -6,14 +6,16 @@ public class ShooterMovement : MonoBehaviour
 {
     private float screenWidth, screenHeight;
 
-    void Start()
-    {
+    void Awake() {
+
         Vector3 rightTop = new Vector3(1, 1, Camera.main.transform.position.z);
         rightTop = Camera.main.ScreenToWorldPoint(rightTop);
 
         screenWidth = rightTop.x;
-        screenHeight = rightTop.y;
-        
+        screenHeight = rightTop.y;       
+    }
+
+    void Start() {
         StartCoroutine(GeneratePosition());
     }
 

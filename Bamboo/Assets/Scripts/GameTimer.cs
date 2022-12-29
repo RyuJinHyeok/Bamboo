@@ -9,7 +9,7 @@ public class GameTimer : MonoBehaviour
     private Text text;
     private float time;
 
-    void Start() {
+    void Awake() {
         text = GetComponent<Text>();
     }
 

@@ -11,28 +11,21 @@ public class Bullet : MonoBehaviour
 
     public void shoot(Vector2 dir) {
         direction = dir;
-        Invoke("DestroyBullet", 15f);
     }
 
     private void DestroyBullet() {
         ObjectPool.ReturnObject(this);
     }
 
-    // private bool isOut(Vector3 pos) {
-    //     Vector3 currentPosition = Camera.main.WorldToScreenPoint(pos);        
-    //     return (currentPosition.x < 0f || currentPosition.x > 1f || currentPosition.y < 0f || currentPosition.y > 1f);
-    // }
+    private bool isOut() {
+        Vector3 currentPosition = Camera.main.WorldToViewportPoint(transform.position);        
+        return (currentPosition.x < 0f || currentPosition.x > 1f || currentPosition.y < 0f || currentPosition.y > 1f);
+    }
 
-
-    // private bool isValid = false;
     void Update()
     {
         transform.Translate(direction * speed);
 
-        // isValid = isValid || !isOut(transform.position);
-
-        // Debug.Log(isOut(transform.position));
-
-        // if (isValid && isOut(transform.position)) Destroy(gameObject, 0);
+        if (isOut()) { Invoke("DestroyBullet", 0f); }
     }
 }
